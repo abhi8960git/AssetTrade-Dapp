@@ -68,8 +68,8 @@ const CreateNftPage = (props: Props) => {
 
 	const instantiate_contract = async () => {
 		const cw721_instantiate_message = {
-			name: "Deauth Token",
-			symbol: "DT",
+			name: "Block-sqaure Token",
+			symbol: "BST",
 			minter: process.env.NEXT_PUBLIC_WALLET_ADDRESS,
 			kernel_address: process.env.NEXT_PUBLIC_KERNEL_ADDRESS,
 		};

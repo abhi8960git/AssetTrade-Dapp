@@ -8,7 +8,7 @@ import Navbar from "@/components/NavBar/Navbar";
 import Image from "next/image";
 export const metadata: Metadata = {
   title: {
-    default: "Deauth",
+    default: "Block-Square",
     template: "%s | App Name",
   },
 };
