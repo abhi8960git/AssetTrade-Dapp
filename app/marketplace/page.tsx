@@ -52,15 +52,15 @@ const MarketPlace = (props: Props) => {
         <Button className="mx-auto">Query MarketPlace</Button>
       </div>
       <div className="grid lg:grid-cols-4  grid-cols-4 gap-9 relative  mt-[6em] ">
-        {["0", "1", "2", "0", "1", "2", "0", "1", "2"].map((item, index) => {
+        {["0"].map((item, index) => {
           return (
             <div key={index}>
               <div
                 key={index}
-                className="relative w-full h-full m-auto rounded-lg shadow-md p-4 overflow-hidden border-3 border-red-400 "
+                className="relative w-full h-full m-auto rounded-lg shadow-md p-4 overflow-hidden border-3 border-red-400"
                 style={{
-                  height: "250px",
-                  width: "350px",
+                  height: "300px",
+                  width: "400px",
                 }}
               >
                 {/* Background Image */}
@@ -71,33 +71,84 @@ const MarketPlace = (props: Props) => {
                   alt="NFT Frame"
                   className="absolute inset-0 z-20"
                 />
-
                 {/* Foreground Image */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[340px] h-[187px] z-10 -mt-3">
-                  <Image
-                    src="/marketplace.webp"
-                    layout="fill"
-                    objectFit="cover"
-                    alt="NFT Image"
-                    className="z-10"
-                  />
-                </div>
-                <div className="absolute top-1/2 left-1/2 text-white transform -translate-x-1/2 -translate-y-1/2   bg opacity-100 hover:opacity-100 w-[320px] h-[180px] cursor-pointer z-40">
-                <p className=" mt-0 pt-3 pl-4   ">
-                  <span
-                  className="bg-red-400 p-2  rounded-lg font-extrabold" 
-                  >1/100</span>
-                </p>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[384px] h-[225px] z-10 -mt-3">
+                  <div className="grid grid-cols-2 grid-rows-2 w-full h-full">
+
+                    <div className="bg-red-400 p-2 relative cursor-pointer">
+                      <div className="relative">
+                        <Image
+                          src="/bg.png"
+                          className="contain z-10"
+                          width={400}
+                          height={400}
+                          alt="kdk"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center  transition-opacity duration-300">
+                          <button className="bg-black text-white z-40 px-4 py-2 rounded">
+                            Buy
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-red-400 p-2 relative">
+                      <div className="relative">
+                        <Image
+                          src="/bg.png"
+                          className="contain z-10"
+                          width={400}
+                          height={400}
+                          alt="kdk"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center  transition-opacity duration-300">
+                          <button className="bg-black text-white z-40 px-4 py-2 rounded">
+                            Buy
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-red-400 p-2 relative">
+                      <div className="relative">
+                        <Image
+                          src="/bg.png"
+                          className="contain z-10"
+                          width={400}
+                          height={400}
+                          alt="kdk"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center  transition-opacity duration-300">
+                          <button className="bg-black text-white z-40 px-4 py-2 rounded">
+                            Buy
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-red-400 p-2 relative">
+                      <div className="relative">
+                        <Image
+                          src="/bg.png"
+                          className="contain z-10"
+                          width={400}
+                          height={400}
+                          alt="kdk"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center  transition-opacity duration-300">
+                          <button className="bg-black text-white z-40 px-4 py-2 rounded">
+                            Buy
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-             <div className="flex justify-center">
-             <CustomModal/>
+              <div className="flex justify-center">
+                <CustomModal />
               </div>
             </div>
           );
         })}
-
       </div>
     </div>
   );

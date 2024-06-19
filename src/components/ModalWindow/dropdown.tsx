@@ -19,7 +19,7 @@ export function Dropdown() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="bg-transparent rounded-none border-none text-red-400 text-2xl hover:bg-transparent hover:text-red-400 mt-1">
+      <DropdownMenuTrigger asChild className="bg-black rounded-none border-none text-red-400 text-2xl hover:bg-transparent hover:text-red-400 mt-1">
         <Button variant="outline">
           <BsCart />
         </Button>

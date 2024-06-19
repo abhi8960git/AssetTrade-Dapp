@@ -29,10 +29,10 @@ const Navbar = () => {
         <Link className="h-fit" href="/">
           <div className=" flex items-end gap-2  h-fit">
             <Image
-              src={"/NavLogo.png"}
+              src={"/logo4.png"}
               alt="logo"
-              width={90}
-              height={90}
+              width={140}
+              height={140}
               className=""
             />
           </div>

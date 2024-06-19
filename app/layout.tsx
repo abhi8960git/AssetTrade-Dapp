@@ -23,9 +23,9 @@ const RootLayout = async (props: Props) => {
   return (
     <html lang="en">
       <body className="relative bg-black">
-        <div className="fixed inset-0 -z-50">
+        <div className="fixed inset-0 -z-50 opacity-50  ">
           <Image
-            src={"/HeroBanner.gif"}
+            src={"/bg.png"}
             alt="haha"
             layout="fill"
             objectFit="cover"

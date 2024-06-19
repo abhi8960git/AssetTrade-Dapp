@@ -134,7 +134,7 @@ const CreateNftPage = (props: Props) => {
 		<Wrapper>
 			<div className="mt-20  w-full relative  ">
 				<Button
-					className=" text-white px-5 mt-5 absolute my-8 -top-[8em]  left-1/2 transform -translate-x-1/2 bg-red-400 rounded-none  "
+					className=" text-white px-5 mt-5 absolute my-8 -top-[8em]  left-1/2 transform -translate-x-1/2 bg-red-400 z-20 rounded-none  "
 					onClick={() => instantiate_contract()}
 				>
 					Instantiate Contract
@@ -222,10 +222,10 @@ const NftArea = ({
 
 	return (
 		<div className="w-fullflex mt-10 h-fit flex-col ">
-			<div className="w-fit mx-auto">
+			<div className="w-fit mx-auto z-20">
 				<Button
 					onClick={queryAllNfts}
-					className="mx-auto bg-red-400 rounded-none "
+					className="mx-auto bg-red-400 rounded-none z-40 "
 				>
 					Get All Child Nfts
 				</Button>
@@ -239,7 +239,7 @@ const NftArea = ({
 							<div key={index} className="size-44  rounded-lg">
 								{image ? (
 									<Image
-										className="mx-auto"
+										className="mx-auto text-white"
 										alt="nftImage"
 										src={image}
 										width={150}

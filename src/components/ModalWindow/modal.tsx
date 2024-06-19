@@ -31,7 +31,7 @@ function CustomModalContent() {
 			<DialogTrigger>
 				<div className=" flex justify-center ">
 					<Button
-						className=" border-2 border-red-400 rounded-none bg-transparent text-white hover:bg-red-400 hover:text-white"
+						className=" border-2 border-red-400 rounded-none bg-black text-white hover:bg-red-400 hover:text-white"
 						// onClick={() => {
 						//   buyNft(item);
 						// }}

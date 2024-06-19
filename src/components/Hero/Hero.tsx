@@ -15,28 +15,33 @@ const HeroBanner = () => {
   const router = useRouter();
   return (
     <div className="w-[100vw] h-[100vh] relative mt-9 overflow-y-none">
-      <Image
-        src={"/HeroBanner.gif"}
-        alt="haha"
-        layout="fill"
-        objectFit="cover"
-        className="object-fill z-10"
-      />
+
+
+      {/* <div className="opacity-50 z-10">
+        {" "}
+        <Image
+          src={"/bg.png"}
+          alt="haha"
+          layout="fill"
+          objectFit="cover"
+          className="object-fill"
+        />
+      </div> */}
 
       <Image
-        src={"/HeroBannerText.png"}
+        src={"/home.png"}
         alt="HeroBannerText"
         width={400}
         height={100}
-        className="z-10 absolute left-0 right-0 top-[2em] mx-auto w-1/2  font-header text-white"
+        className="z-10 absolute left-0 right-0 top-[8em] mx-auto w-1/2  font-header text-white "
       />
 
       <Image
-        src={"/HeroBannerText2.png"}
+        src={"/here.png"}
         alt="HeroBannerText"
         width={400}
         height={100}
-        className="z-10 absolute left-0 right-0 top-[15em] mx-auto w-1/2  font-header text-white"
+        className="z-10 absolute left-0 right-0 top-[15em] mx-auto w-1/2  font-header text-white "
       />
 
       <div className="absolute z-10 left-1/2 transform -translate-x-1/2 top-[36em] p-9 mx-auto flex gap-9">
@@ -46,7 +51,7 @@ const HeroBanner = () => {
             router.push("/Create");
           }}
         >
-          Sell Your ART
+          List Land NFT
         </button>
 
         <button
@@ -55,22 +60,22 @@ const HeroBanner = () => {
             router.push("/marketplace");
           }}
         >
-          Go to Marketplace
+          Buy Land NFT
         </button>
       </div>
 
       <div className="w-5 h-5">
         <Image
-          src={"/NFT-1.png"}
+          src={"/left-nft.webp"}
           alt="HeroBannerText"
           width={400}
-          height={100}
+          height={200}
           className="z-10 absolute left-[8em] top-[25em] mx-auto   font-header text-white w-[25em] h-[25em]"
         />
       </div>
 
       <Image
-        src={"/NFT-2.png"}
+        src={"/right-nft.png"}
         alt="HeroBannerText"
         width={400}
         height={100}

@@ -34,7 +34,7 @@ const Connected: FC<ConnectedProps> = (props) => {
 				<>
 					<PopoverTrigger>
 						<Button 
-						className=" border-2 border-red-400 rounded-none  bg-none"
+						className=" border-2 border-red-400 rounded-none  bg-black"
 						>
 							<HStack mr="2">
 								<Image
@@ -59,7 +59,7 @@ const Connected: FC<ConnectedProps> = (props) => {
 						</Button>
 					</PopoverTrigger>
 					<PopoverContent>
-						<PopoverBody className="bg-none border-2 border-red-400 p-4   border-gray-600 " >
+						<PopoverBody className="bg-black border-2 border-red-400 p-4   border-gray-600 " >
 							<HStack mb={3} justifyContent="start">
 								<Image src={config?.iconUrls?.sm ?? ""} width={30} />
 								<Text fontWeight={600} color="gray.700" flex={1} className="text-red-400">
