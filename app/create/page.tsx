@@ -16,10 +16,11 @@ import { v4 as uuidv4, V4Options } from "uuid";
 import { useToast } from "@chakra-ui/react";
 import { useAndromedaStore } from "@/zustand/andromeda";
 
-type Props = {};
+type Props = {
 
-const CreateNftPage = (props: Props) => {
-  const serverAddr = process.env.NEXT_PUBLIC_SERVER_URL;
+};
+
+const Create = (props: Props) => {
   const client = useAndromedaClient();
 
   const toast = useToast();
@@ -307,4 +308,4 @@ const SellButton = ({
   );
 };
 
-export default CreateNftPage;
+export default Create;
