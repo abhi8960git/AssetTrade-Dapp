@@ -12,6 +12,7 @@ import { NFT_metadata } from "@/helpers/staticRandomNfts";
 const projectId = "2ONjCGu7UlrPOzmZ3hqy8WlN2GC";
 const projectSecretKey = "43cc6a424bd74fd70d8a175972fbba87";
 import { useRouter } from "next/navigation";
+import { useAndromedaStore } from "@/zustand/andromeda";
 
 const auth = `Basic ${Buffer.from(`${projectId}:${projectSecretKey}`).toString(
 	"base64"
@@ -48,6 +49,8 @@ const CreateNftButton = ({
 	const [CW721contract, setCW721Contract] = useState("andr1c4uz0w0vvnfc8c24cycp5l52fwcgtrzp42thekarkggrnwuphurqj5ll6v");
 	const [description, setDescription] = useState("");
 	const [isloading, setLoading] = useState(true);
+	const { accounts } = useAndromedaStore();
+
 
 	//@ts-ignore
 	const uploadToIPFS = async (event) => {
@@ -81,13 +84,15 @@ const CreateNftButton = ({
 			const token_id = uuidv4();
 			const owner_of_minted_nft: string =
 				process.env.NEXT_PUBLIC_CONTRACT_OWNER!; //remove static but it only works if you are the owner of the contract
+			const mywallet_addr = accounts[0].address;
+
 			const token_uri: NFT_metadata = {
 				name: "Land NFT",
 				description: "This NFT represents ownership of the whole land until child nfts are created",
 				image: image,
 			};
 
-			await mintNft(token_id, owner_of_minted_nft, JSON.stringify(token_uri));
+			await mintNft(token_id, mywallet_addr, JSON.stringify(token_uri));
 
 		} catch (error) {
 			console.log("ipfs uri upload error: ", error);

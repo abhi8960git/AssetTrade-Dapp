@@ -126,34 +126,36 @@ const DistributeNfts = (props: Props) => {
 				console.log("something missing c:", contract_address, " q:", query);
 				return;
 			}
-			console.log(marketPlaceAddress);
+			console.log('marketplaceADDR', marketPlaceAddress, all_nft_token_ids);
 
 			const nft1 = await client?.execute(contract_address!, {
 				send_nft: {
 					contract: marketPlaceAddress,
 					token_id: all_nft_token_ids[0],
-					msg: "eyJzdGFydF9zYWxlIjp7ImNvaW5fZGVub20iOiJ1YW5kciIsInN0YXJ0X3RpbWUiOm51bGwsImR1cmF0aW9uIjpudWxsLCJwcmljZSI6IjEwMDAifX0=",
+					msg: "eyJzdGFydF9zYWxlIjp7InJlY2lwaWVudCI6bnVsbCwidXNlc19jdzIwIjpmYWxzZSwiY29pbl9kZW5vbSI6InVhbmRyIiwic3RhcnRfdGltZSI6bnVsbCwiZHVyYXRpb24iOjYwNDgwMDAwMCwicHJpY2UiOiIyMDAwMCJ9fQ==",
 				},
 			});
 			const nft2 = await client?.execute(contract_address!, {
 				send_nft: {
 					contract: marketPlaceAddress,
 					token_id: all_nft_token_ids[1],
-					msg: "eyJzdGFydF9zYWxlIjp7ImNvaW5fZGVub20iOiJ1YW5kciIsInN0YXJ0X3RpbWUiOm51bGwsImR1cmF0aW9uIjpudWxsLCJwcmljZSI6IjEwMDAifX0=",
+					msg: "eyJzdGFydF9zYWxlIjp7InJlY2lwaWVudCI6bnVsbCwidXNlc19jdzIwIjpmYWxzZSwiY29pbl9kZW5vbSI6InVhbmRyIiwic3RhcnRfdGltZSI6bnVsbCwiZHVyYXRpb24iOjYwNDgwMDAwMCwicHJpY2UiOiIyMDAwMCJ9fQ==",
+					
 				},
 			});
 			const nft3 = await client?.execute(contract_address!, {
 				send_nft: {
 					contract: marketPlaceAddress,
 					token_id: all_nft_token_ids[2],
-					msg: "eyJzdGFydF9zYWxlIjp7ImNvaW5fZGVub20iOiJ1YW5kciIsInN0YXJ0X3RpbWUiOm51bGwsImR1cmF0aW9uIjpudWxsLCJwcmljZSI6IjEwMDAifX0=",
+					msg: "eyJzdGFydF9zYWxlIjp7InJlY2lwaWVudCI6bnVsbCwidXNlc19jdzIwIjpmYWxzZSwiY29pbl9kZW5vbSI6InVhbmRyIiwic3RhcnRfdGltZSI6bnVsbCwiZHVyYXRpb24iOjYwNDgwMDAwMCwicHJpY2UiOiIyMDAwMCJ9fQ==",
 				},
 			});
 			const nft4 = await client?.execute(contract_address!, {
 				send_nft: {
 					contract: marketPlaceAddress,
 					token_id: all_nft_token_ids[3],
-					msg: "eyJzdGFydF9zYWxlIjp7ImNvaW5fZGVub20iOiJ1YW5kciIsInN0YXJ0X3RpbWUiOm51bGwsImR1cmF0aW9uIjpudWxsLCJwcmljZSI6IjEwMDAifX0=",
+					msg: "eyJzdGFydF9zYWxlIjp7InJlY2lwaWVudCI6bnVsbCwidXNlc19jdzIwIjpmYWxzZSwiY29pbl9kZW5vbSI6InVhbmRyIiwic3RhcnRfdGltZSI6bnVsbCwiZHVyYXRpb24iOjYwNDgwMDAwMCwicHJpY2UiOiIyMDAwMCJ9fQ==",
+
 				},
 			});
 
@@ -182,7 +184,7 @@ const DistributeNfts = (props: Props) => {
 					send_nft: {
 						contract: marketPlaceAddress,
 						token_id: item,
-						msg: "eyJzdGFydF9zYWxlIjp7ImNvaW5fZGVub20iOiJ1YW5kciIsInN0YXJ0X3RpbWUiOm51bGwsImR1cmF0aW9uIjpudWxsLCJwcmljZSI6IjEwMDAifX0=",
+						msg: "eyJzdGFydF9zYWxlIjp7InJlY2lwaWVudCI6bnVsbCwidXNlc19jdzIwIjpmYWxzZSwiY29pbl9kZW5vbSI6InVhbmRyIiwic3RhcnRfdGltZSI6bnVsbCwiZHVyYXRpb24iOjYwNDgwMDAwMCwicHJpY2UiOiIyMDAwMCJ9fQ==",
 					},
 				},
 				funds
@@ -292,7 +294,7 @@ const DistributeNfts = (props: Props) => {
 						getNftImage();
 					}}
 				>
-					Get all NFTs to sell
+					2. Get all NFTs to sell in the marketplace
 				</Button>
 
 				<Button
@@ -301,7 +303,7 @@ const DistributeNfts = (props: Props) => {
 						sendNftsToMarket(allNfts);
 					}}
 				>
-					List on the MarketPlace
+					3. List on the MarketPlace
 				</Button>
 
 				<Button
@@ -310,7 +312,7 @@ const DistributeNfts = (props: Props) => {
 					}}
 					className="border-2 border-red-400 bg-red-300 p-5 text-black rounded-none hover:text-white "
 				>
-					Query MarketPlace
+					4. Query MarketPlace
 				</Button>
 				<Button
 					onClick={() => {
@@ -318,7 +320,7 @@ const DistributeNfts = (props: Props) => {
 					}}
 					className="border-2 border-red-400 bg-red-300 p-5 text-black rounded-none hover:text-white "
 				>
-					batchSend
+					5. batchSend
 				</Button>
 			</div>
 
@@ -336,18 +338,18 @@ const DistributeNfts = (props: Props) => {
 										key={index}
 									>
 										{nft}
-										{}
+										{ }
 										<Button
 											onClick={() => buyNft(nft)}
 											className="bg-red-400 rounded-none"
 										>
-											Buy this Nft
-										</Button>
+											Your Land's child NFT's for sale {index}
+										</Button> 
 									</li>
 								);
 							})
 						}
-						{}
+						{ }
 					</ul>
 				</div>
 			)}

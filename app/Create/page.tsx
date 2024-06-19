@@ -14,12 +14,14 @@ import { useRouter } from "next/navigation";
 import { randomUUID } from "crypto";
 import { v4 as uuidv4, V4Options } from "uuid";
 import { useToast } from "@chakra-ui/react";
+import { useAndromedaStore } from "@/zustand/andromeda";
 
 type Props = {};
 
 const CreateNftPage = (props: Props) => {
 	const serverAddr = process.env.NEXT_PUBLIC_SERVER_URL;
 	const client = useAndromedaClient();
+
 	const toast = useToast();
 	const { data: code_id } = useGetCodeId("cw721");
 	const [contract, setContract] = useState({});
@@ -225,7 +227,8 @@ const SellButton = ({
 }) => {
 	const client = useAndromedaClient();
 	const [isLoading, setLoading] = useState(false);
-
+	const { accounts } = useAndromedaStore();
+	const mywallet_addr = accounts[0].address;
 	const router = useRouter();
 
 	const sell = async () => {
@@ -244,7 +247,7 @@ const SellButton = ({
 		const queryMessage = {
 			mint: {
 				token_id: reference_nft_token_id,
-				owner: process.env.NEXT_PUBLIC_CONTRACT_OWNER,
+				owner: mywallet_addr,
 				token_uri: token_uri,
 				extension: {
 					publisher: "Andromeda",
@@ -305,3 +308,5 @@ const SellButton = ({
 };
 
 export default CreateNftPage;
+
+
