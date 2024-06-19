@@ -1,4 +1,9 @@
 # Block Square Platform
+<p>&nbsp;</p>
+<p align="center">
+<img src="./public/logo4.png" width=300>
+</p>
+<p>&nbsp;</p>
 
 ## Project Description
 
@@ -90,9 +95,7 @@ To address this challenge, we implemented a verification process during NFT purc
 <img src="./assets/idea-v3.1.png" width=1000>
 </p>
 <p>&nbsp;</p>
-<p align="center">
-<img src="./assets/idea-v3.2.png" width=1000>
-</p>
+
 ---
 
 ## How to Use the Project
