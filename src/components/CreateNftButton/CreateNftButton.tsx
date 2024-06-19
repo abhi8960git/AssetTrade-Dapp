@@ -5,13 +5,14 @@ import { Row, Form } from "react-bootstrap";
 import { create as ipfsHttpClient } from "ipfs-http-client";
 import { Buffer } from "buffer";
 import { Button } from "@/components/ui/button";
-import Wrapper from "../Wrappers/Wrapper";
+import Wrapper from "@/components/Wrappers/Wrapper";
 import AndromedaClient from "@andromedaprotocol/andromeda.js";
 import { NFT_metadata } from "@/helpers/staticRandomNfts";
 // const client = ipfsHttpClient('https://uniqo.infura-ipfs.io')
 const projectId = "2ONjCGu7UlrPOzmZ3hqy8WlN2GC";
 const projectSecretKey = "43cc6a424bd74fd70d8a175972fbba87";
 import { useRouter } from "next/navigation";
+import { useAndromedaStore } from "@/zustand/andromeda";
 
 const auth = `Basic ${Buffer.from(`${projectId}:${projectSecretKey}`).toString(
 	"base64"
@@ -45,9 +46,11 @@ const CreateNftButton = ({
 	const [image, setImage] = useState("");
 	const [price, setPrice] = useState(null);
 	const [name, setName] = useState("");
-	const [CW721contract, setCW721Contract] = useState("");
+	const [CW721contract, setCW721Contract] = useState("andr1c4uz0w0vvnfc8c24cycp5l52fwcgtrzp42thekarkggrnwuphurqj5ll6v");
 	const [description, setDescription] = useState("");
 	const [isloading, setLoading] = useState(true);
+	const { accounts } = useAndromedaStore();
+
 
 	//@ts-ignore
 	const uploadToIPFS = async (event) => {
@@ -81,14 +84,16 @@ const CreateNftButton = ({
 			const token_id = uuidv4();
 			const owner_of_minted_nft: string =
 				process.env.NEXT_PUBLIC_CONTRACT_OWNER!; //remove static but it only works if you are the owner of the contract
+			const mywallet_addr = accounts[0].address;
+
 			const token_uri: NFT_metadata = {
-				name: "Token1",
-				description: "This is a description",
+				name: "Land NFT",
+				description: "This NFT represents ownership of the whole land until child nfts are created",
 				image: image,
 			};
 
-			await mintNft(token_id, owner_of_minted_nft, JSON.stringify(token_uri));
-			await handleCreateDesign(owner_of_minted_nft, token_id,)
+			await mintNft(token_id, mywallet_addr, JSON.stringify(token_uri));
+
 		} catch (error) {
 			console.log("ipfs uri upload error: ", error);
 			setLoading(false);
@@ -96,67 +101,8 @@ const CreateNftButton = ({
 	};
 
 
-	const handleCreateDesign = async (designerWalletAddr: any, parentNftTokenId: any) => {
-		try {
-			const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL
-				}/api/design/create`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					"x-api-key": "deauthAndromeda",
-				},
-				body: JSON.stringify({
-					designerWalletAddr,
-					parentNftTokenId,
 
-				}),
-			});
 
-			const data = await response.json();
-
-			if (!response.ok) {
-				throw new Error(data.message);
-			}
-			console.log("added parent nft", data)
-
-		} catch (error: any) {
-			console.error('Error:', error.message);
-			console.log('Failed to create design');
-		}
-	};
-
-	const getDesignerDetails = async () => {
-		try {
-			const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL
-				}/api/designer/getDesignerDetails`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					"x-api-key": "deauthAndromeda",
-				},
-				body: JSON.stringify({ walletAddr: process.env.NEXT_PUBLIC_WALLET_ADDRESS }),
-			});
-
-			if (!response.ok) {
-				throw new Error("Failed to fetch designer details");
-			}
-
-			const data = await response.json();
-			const { cw721_addr, associated_marketplace_addr } = data;
-			console.log("api hit got contract addr", data);
-			setCW721Contract(cw721_addr);
-		} catch (error) {
-			console.error("Error:", error);
-		}
-	};
-
-	useEffect(() => {
-		const fetchData = async () => {
-			await getDesignerDetails();
-			console.log("api done");
-		};
-		fetchData();
-	}, [wallet_address]); // Call only once when the component mounts
 
 	const mintNft = async (
 		token_id: string,
@@ -189,6 +135,7 @@ const CreateNftButton = ({
 	return (
 		<Wrapper>
 			<div className="content mx-auto flex flex-col gap-10 px-20 w-1/2 border-2 border-red-400 p-3 py-8  shadow-lg mt-[12em]">
+				<h1>Here you create your main land owner NFT which will be used by you to prove land ownership and sell parts of your land :)</h1>
 				<Form.Control
 					type="file"
 					required

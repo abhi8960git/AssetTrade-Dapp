@@ -1,0 +1,23 @@
+{
+  "landowners": [
+    {
+      "_id": "66140ac53dc2dec85f305d7f",
+      "lands": ["66140b283dc2dec85f305d86"],
+      "wallet_addr": "andr13g8qm62yu5zhvk4e33zjcs63ne3sv4xt449yl4",
+      "cw721_addr": "andr1yzjyl7m37h3a4xqt95yk8mxuuu4n4syvu45dsydnzfkp6umeafns3g8ts3",
+      "associated_marketplace_addr": "andr1k647laueq9gl7u9m7x2h3enwr9xrr3eunje383kvjgf97zhqxtes2nhwzz"
+    }
+  ],
+  "lands": [
+    {
+      "_id": "6613f00b1741f9ca301e2227",
+      "parent_nft": {
+        "owner": "andr12yss47wjjqufx9jle8mjscal3jravrejns5kml",
+        "token_id": "9b091c7c-668d-4548-9ff8-2b01c1f9dcd1"
+      },
+      "child_nft": [],
+      "splitter_addr": "",
+      "timelock_addr": ""
+    }
+  ]
+}

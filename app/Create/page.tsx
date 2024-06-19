@@ -14,62 +14,28 @@ import { useRouter } from "next/navigation";
 import { randomUUID } from "crypto";
 import { v4 as uuidv4, V4Options } from "uuid";
 import { useToast } from "@chakra-ui/react";
+import { useAndromedaStore } from "@/zustand/andromeda";
 
 type Props = {};
 
 const CreateNftPage = (props: Props) => {
 	const serverAddr = process.env.NEXT_PUBLIC_SERVER_URL;
 	const client = useAndromedaClient();
+
 	const toast = useToast();
 	const { data: code_id } = useGetCodeId("cw721");
 	const [contract, setContract] = useState({});
 
 
-	const [contractAddress, setContractAddress] = useState("");
+	// const [contractAddress, setContractAddress] = useState("");
 
-	const [CW721contract, setCW721Contract] = useState("");
+	const [CW721contract, setCW721Contract] = useState("andr1c4uz0w0vvnfc8c24cycp5l52fwcgtrzp42thekarkggrnwuphurqj5ll6v");
 
-	const getDesignerDetails = async () => {
-		try {
-			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_SERVER_URL}/api/designer/getDesignerDetails`,
-				{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-						"x-api-key": "deauthAndromeda",
-					},
-					body: JSON.stringify({
-						walletAddr: process.env.NEXT_PUBLIC_WALLET_ADDRESS,
-					}),
-				}
-			);
-
-			if (!response.ok) {
-				throw new Error("Failed to fetch designer details");
-			}
-
-			const data = await response.json();
-			const { cw721_addr, associated_marketplace_addr } = data;
-			console.log("api hit got contract addr 22", data);
-			setCW721Contract(cw721_addr);
-		} catch (error) {
-			console.error("Error:", error);
-		}
-	};
-
-	useEffect(() => {
-		const fetchData = async () => {
-			await getDesignerDetails();
-			console.log("api done");
-		};
-		fetchData();
-	}, []);
 
 	const instantiate_contract = async () => {
 		const cw721_instantiate_message = {
-			name: "Deauth Token",
-			symbol: "DT",
+			name: "Block-sqaure Token",
+			symbol: "BST",
 			minter: process.env.NEXT_PUBLIC_WALLET_ADDRESS,
 			kernel_address: process.env.NEXT_PUBLIC_KERNEL_ADDRESS,
 		};
@@ -83,17 +49,12 @@ const CreateNftPage = (props: Props) => {
 			console.log("contract", contract);
 			if (contract) {
 				setContract(contract);
-				setContractAddress(contract?.contractAddress);
+				setCW721Contract(contract?.contractAddress);
+
 				// Add API POST request data here
-				const postData = {
-					wallet_addr: process.env.NEXT_PUBLIC_WALLET_ADDRESS,
-					associated_marketplace_addr: process.env.NEXT_PUBLIC_MARKETPLACE_ADDR,
-					cw721_addr: contract?.contractAddress,
-				};
-				console.log(postData);
-				await postDataToAPI(postData);
+
 				toast({
-					title: "Designer created successfully",
+					title: "Land NFT created successfully",
 					status: "success",
 					duration: 3000,
 					isClosable: true,
@@ -102,7 +63,7 @@ const CreateNftPage = (props: Props) => {
 		} catch (error) {
 			console.error(error);
 			toast({
-				title: "Failed to create designer",
+				title: "Failed to create Land NFT",
 				status: "error",
 				duration: 3000,
 				isClosable: true,
@@ -110,35 +71,22 @@ const CreateNftPage = (props: Props) => {
 		}
 	};
 
-	const postDataToAPI = async (data: any) => {
-		try {
-			const response = await fetch(`${serverAddr}/api/designer/create`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					"x-api-key": "deauthAndromeda",
-				},
-				body: JSON.stringify(data),
-			});
-			if (response.ok) {
-				console.log("Designer created successfully");
-			} else {
-				console.error("Failed to create designer:", response.statusText);
-			}
-		} catch (error) {
-			console.error("Error creating designer:", error);
-		}
-	};
+
 
 	return (
 		<Wrapper>
 			<div className="mt-20  w-full relative  ">
 				<Button
-					className=" text-white px-5 mt-5 absolute my-8 -top-[8em]  left-1/2 transform -translate-x-1/2 bg-red-400 z-20 rounded-none  "
+					className="text-white px-5 mt-5 absolute my-8 -top-[8em] left-1/2 transform -translate-x-1/2 bg-red-400 z-20 rounded-none"
 					onClick={() => instantiate_contract()}
 				>
-					Instantiate Contract
+					Instantiate Your Land Contract
 				</Button>
+				{CW721contract && (
+					<p className="text-center mt-2 text-red-500">
+						Your Contract Addr: {CW721contract}
+					</p>
+				)}
 				<CreateNftButton
 					andromeda_client={client}
 					wallet_address={
@@ -175,6 +123,7 @@ const NftArea = ({
 		// Add event listener for storage changes
 		const handleStorageChange = () => {
 			const newTokenId = localStorage.getItem("mainNftTokenId");
+			console.log('main NFT', newTokenId)
 			setMainNftTokenId(newTokenId as string);
 		};
 
@@ -189,12 +138,12 @@ const NftArea = ({
 	const queryAllNfts = async () => {
 		const queryMessage = {
 			all_tokens: {
-				limit: 100,
+				limit: 4,
 			},
 		};
 		const imageQuery = {
 			all_nft_info: {
-				token_id: mainNftTokenId,
+				token_id: mainNftTokenId ? mainNftTokenId : "58d97de9-ce43-42a7-9243-1cf9f8ae83a1",
 				include_expired: false,
 			},
 		};
@@ -227,29 +176,29 @@ const NftArea = ({
 					onClick={queryAllNfts}
 					className="mx-auto bg-red-400 rounded-none z-40 "
 				>
-					Get All Child Nfts
+					Get All Nfts
 				</Button>
 			</div>
 			<div className="grid grid-cols-4 gap-5 my-10 mx-auto">
 				{
 					//@ts-ignore
 					nfts?.tokens?.length >= 0 &&
-						//@ts-ignore
-						nfts.tokens.map((item, index) => (
-							<div key={index} className="size-44  rounded-lg">
-								{image ? (
-									<Image
-										className="mx-auto text-white"
-										alt="nftImage"
-										src={image}
-										width={150}
-										height={150}
-									/>
-								) : (
-									<div className="p-1 bg-blue-300"></div>
-								)}
-							</div>
-						))
+					//@ts-ignore
+					nfts.tokens.map((item, index) => (
+						<div key={index} className="size-44  rounded-lg">
+							{image ? (
+								<Image
+									className="mx-auto text-white"
+									alt="nftImage"
+									src={image}
+									width={150}
+									height={150}
+								/>
+							) : (
+								<div className="p-1 bg-blue-300"></div>
+							)}
+						</div>
+					))
 				}
 			</div>
 			{
@@ -278,7 +227,8 @@ const SellButton = ({
 }) => {
 	const client = useAndromedaClient();
 	const [isLoading, setLoading] = useState(false);
-
+	const { accounts } = useAndromedaStore();
+	const mywallet_addr = accounts[0].address;
 	const router = useRouter();
 
 	const sell = async () => {
@@ -297,7 +247,7 @@ const SellButton = ({
 		const queryMessage = {
 			mint: {
 				token_id: reference_nft_token_id,
-				owner: process.env.NEXT_PUBLIC_CONTRACT_OWNER,
+				owner: mywallet_addr,
 				token_uri: token_uri,
 				extension: {
 					publisher: "Andromeda",
@@ -358,3 +308,5 @@ const SellButton = ({
 };
 
 export default CreateNftPage;
+
+

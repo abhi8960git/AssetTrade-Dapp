@@ -121,41 +121,41 @@ const DistributeNfts = (props: Props) => {
       return;
     }
 
-    try {
-      if (!contract_address || !client) {
-        console.log("something missing c:", contract_address, " q:", query);
-        return;
-      }
-      console.log(marketPlaceAddress);
+		try {
+			if (!contract_address || !client) {
+				console.log("something missing c:", contract_address, " q:", query);
+				return;
+			}
+			console.log(marketPlaceAddress);
 
-      const nft1 = await client?.execute(contract_address!, {
-        send_nft: {
-          contract: marketPlaceAddress,
-          token_id: all_nft_token_ids[0],
-          msg: "eyJzdGFydF9zYWxlIjp7ImNvaW5fZGVub20iOiJ1YW5kciIsInN0YXJ0X3RpbWUiOm51bGwsImR1cmF0aW9uIjpudWxsLCJwcmljZSI6IjEwMDAifX0=",
-        },
-      });
-      const nft2 = await client?.execute(contract_address!, {
-        send_nft: {
-          contract: marketPlaceAddress,
-          token_id: all_nft_token_ids[1],
-          msg: "eyJzdGFydF9zYWxlIjp7ImNvaW5fZGVub20iOiJ1YW5kciIsInN0YXJ0X3RpbWUiOm51bGwsImR1cmF0aW9uIjpudWxsLCJwcmljZSI6IjEwMDAifX0=",
-        },
-      });
-      const nft3 = await client?.execute(contract_address!, {
-        send_nft: {
-          contract: marketPlaceAddress,
-          token_id: all_nft_token_ids[2],
-          msg: "eyJzdGFydF9zYWxlIjp7ImNvaW5fZGVub20iOiJ1YW5kciIsInN0YXJ0X3RpbWUiOm51bGwsImR1cmF0aW9uIjpudWxsLCJwcmljZSI6IjEwMDAifX0=",
-        },
-      });
-      const nft4 = await client?.execute(contract_address!, {
-        send_nft: {
-          contract: marketPlaceAddress,
-          token_id: all_nft_token_ids[3],
-          msg: "eyJzdGFydF9zYWxlIjp7ImNvaW5fZGVub20iOiJ1YW5kciIsInN0YXJ0X3RpbWUiOm51bGwsImR1cmF0aW9uIjpudWxsLCJwcmljZSI6IjEwMDAifX0=",
-        },
-      });
+			const nft1 = await client?.execute(contract_address!, {
+				send_nft: {
+					contract: marketPlaceAddress,
+					token_id: all_nft_token_ids[0],
+					msg: "eyJzdGFydF9zYWxlIjp7ImNvaW5fZGVub20iOiJ1YW5kciIsInN0YXJ0X3RpbWUiOm51bGwsImR1cmF0aW9uIjpudWxsLCJwcmljZSI6IjEwMDAifX0=",
+				},
+			});
+			const nft2 = await client?.execute(contract_address!, {
+				send_nft: {
+					contract: marketPlaceAddress,
+					token_id: all_nft_token_ids[1],
+					msg: "eyJzdGFydF9zYWxlIjp7ImNvaW5fZGVub20iOiJ1YW5kciIsInN0YXJ0X3RpbWUiOm51bGwsImR1cmF0aW9uIjpudWxsLCJwcmljZSI6IjEwMDAifX0=",
+				},
+			});
+			const nft3 = await client?.execute(contract_address!, {
+				send_nft: {
+					contract: marketPlaceAddress,
+					token_id: all_nft_token_ids[2],
+					msg: "eyJzdGFydF9zYWxlIjp7ImNvaW5fZGVub20iOiJ1YW5kciIsInN0YXJ0X3RpbWUiOm51bGwsImR1cmF0aW9uIjpudWxsLCJwcmljZSI6IjEwMDAifX0=",
+				},
+			});
+			const nft4 = await client?.execute(contract_address!, {
+				send_nft: {
+					contract: marketPlaceAddress,
+					token_id: all_nft_token_ids[3],
+					msg: "eyJzdGFydF9zYWxlIjp7ImNvaW5fZGVub20iOiJ1YW5kciIsInN0YXJ0X3RpbWUiOm51bGwsImR1cmF0aW9uIjpudWxsLCJwcmljZSI6IjEwMDAifX0=",
+				},
+			});
 
       console.log("nft sent: ", nft1, nft2, nft3, nft4);
     } catch (error) {
@@ -174,20 +174,20 @@ const DistributeNfts = (props: Props) => {
       return;
     }
 
-    const funds: Coin[] = [];
-    const endcoded_messages = all_nft_token_ids.map((item, index) => {
-      return client?.chainClient?.encodeExecuteMsg(
-        contract_address as string,
-        {
-          send_nft: {
-            contract: marketPlaceAddress,
-            token_id: item,
-            msg: "eyJzdGFydF9zYWxlIjp7ImNvaW5fZGVub20iOiJ1YW5kciIsInN0YXJ0X3RpbWUiOm51bGwsImR1cmF0aW9uIjpudWxsLCJwcmljZSI6IjEwMDAifX0=",
-          },
-        },
-        funds
-      );
-    });
+		const funds: Coin[] = [];
+		const endcoded_messages = all_nft_token_ids.map((item, index) => {
+			return client?.chainClient?.encodeExecuteMsg(
+				contract_address as string,
+				{
+					send_nft: {
+						contract: marketPlaceAddress,
+						token_id: item,
+						msg: "eyJzdGFydF9zYWxlIjp7ImNvaW5fZGVub20iOiJ1YW5kciIsInN0YXJ0X3RpbWUiOm51bGwsImR1cmF0aW9uIjpudWxsLCJwcmljZSI6IjEwMDAifX0=",
+					},
+				},
+				funds
+			);
+		});
 
     console.log("message", endcoded_messages);
 
@@ -274,85 +274,85 @@ const DistributeNfts = (props: Props) => {
     }
   };
 
-  return (
-    <div className="mt-28 flex flex-col w-full justify-center">
-      <div className="flex justify-center gap-5">
-        <Button
-          className="border-2 border-red-400 bg-red-300 p-5 text-black rounded-none hover:text-white "
-          onClick={() => {
-            instantiateMarketPlace();
-          }}
-        >
-          1. Instantiate MarketPlace
-        </Button>
-        <Button
-          className="border-2 border-red-400 bg-red-300 p-5 text-black rounded-none hover:text-white "
-          onClick={() => {
-            getAllNfts();
-            getNftImage();
-          }}
-        >
-          Get all NFTs to sell
-        </Button>
+	return (
+		<div className="mt-28 flex flex-col w-full justify-center">
+			<div className="flex justify-center gap-5">
+				<Button
+					className="border-2 border-red-400 bg-red-300 p-5 text-black rounded-none hover:text-white "
+					onClick={() => {
+						instantiateMarketPlace();
+					}}
+				>
+					1. Instantiate MarketPlace
+				</Button>
+				<Button
+					className="border-2 border-red-400 bg-red-300 p-5 text-black rounded-none hover:text-white "
+					onClick={() => {
+						getAllNfts();
+						getNftImage();
+					}}
+				>
+					Get all NFTs to sell
+				</Button>
 
-        <Button
-          className="border-2 border-red-400 bg-red-300 p-5 text-black rounded-none hover:text-white "
-          onClick={() => {
-            sendNftsToMarket(allNfts);
-          }}
-        >
-          List on the MarketPlace
-        </Button>
+				<Button
+					className="border-2 border-red-400 bg-red-300 p-5 text-black rounded-none hover:text-white "
+					onClick={() => {
+						sendNftsToMarket(allNfts);
+					}}
+				>
+					List on the MarketPlace
+				</Button>
 
-        <Button
-          onClick={() => {
-            queryMarketPlace(allNfts);
-          }}
-          className="border-2 border-red-400 bg-red-300 p-5 text-black rounded-none hover:text-white "
-        >
-          Query MarketPlace
-        </Button>
-        <Button
-          onClick={() => {
-            batchSendNft(allNfts);
-          }}
-          className="border-2 border-red-400 bg-red-300 p-5 text-black rounded-none hover:text-white "
-        >
-          batchSend
-        </Button>
-      </div>
+				<Button
+					onClick={() => {
+						queryMarketPlace(allNfts);
+					}}
+					className="border-2 border-red-400 bg-red-300 p-5 text-black rounded-none hover:text-white "
+				>
+					Query MarketPlace
+				</Button>
+				<Button
+					onClick={() => {
+						batchSendNft(allNfts);
+					}}
+					className="border-2 border-red-400 bg-red-300 p-5 text-black rounded-none hover:text-white "
+				>
+					batchSend
+				</Button>
+			</div>
 
-      {allNfts && allNfts.length > 0 && (
-        <div>
-          {/* <img className="size-44" src={image || ""} alt="image" /> */}
-          {/* <h1 className="text-white">Total NFTs: {allNfts.length}</h1> */}
-          <ul className=" flex flex-col gap-1 items-center mt-[2em]">
-            {
-              //@ts-ignore
-              allNfts.map((nft, index) => {
-                return (
-                  <li
-                    className="border-2 border-red-400 shadow-md p-2 m-1 flex justify-between w-1/2 mx-auto text-white font-extrabold"
-                    key={index}
-                  >
-                    {nft}
-                    {}
-                    <Button
-                      onClick={() => buyNft(nft)}
-                      className="bg-red-400 rounded-none"
-                    >
-                      Buy this Nft
-                    </Button>
-                  </li>
-                );
-              })
-            }
-            {}
-          </ul>
-        </div>
-      )}
-    </div>
-  );
+			{allNfts && allNfts.length > 0 && (
+				<div>
+					{/* <img className="size-44" src={image || ""} alt="image" /> */}
+					{/* <h1 className="text-white">Total NFTs: {allNfts.length}</h1> */}
+					<ul className=" flex flex-col gap-1 items-center mt-[2em]">
+						{
+							//@ts-ignore
+							allNfts.map((nft, index) => {
+								return (
+									<li
+										className="border-2 border-red-400 shadow-md p-2 m-1 flex justify-between w-1/2 mx-auto text-white font-extrabold"
+										key={index}
+									>
+										{nft}
+										{}
+										<Button
+											onClick={() => buyNft(nft)}
+											className="bg-red-400 rounded-none"
+										>
+											Buy this Nft
+										</Button>
+									</li>
+								);
+							})
+						}
+						{}
+					</ul>
+				</div>
+			)}
+		</div>
+	);
 };
 
 export default DistributeNfts;
